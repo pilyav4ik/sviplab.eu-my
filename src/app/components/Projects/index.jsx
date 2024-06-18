@@ -26,13 +26,15 @@ const projects = [
     title: "Locomotive",
     src: "locomotive.png",
     color: "#EFE8D3",
-    url: "#"
+    url: "",
+    slug: ""
   },
   {
     title: "Silencio",
     src: "silencio.png",
     color: "#706D63",
-    url: "#"
+    url: "",
+    slug: ""
   }
 ]
 
@@ -87,7 +89,7 @@ export default function Projects() {
   }
 
   return (
-    <main onMouseMove={(e) => { moveItems(e.clientX, e.clientY) }} className={styles.projects + ' h-screen'} id='projects'>
+    <main onMouseMove={(e) => { moveItems(e.clientX, e.clientY) }} className={styles.projects + ' min-h-screen'} id='projects'>
       <div className='py-16'>
         <span className='bg-emerald-700 text-white px-5 py-3 rounded-full'>Our cases</span>
       </div>
@@ -97,7 +99,7 @@ export default function Projects() {
         {
           projects.map((project, index) => {
             return (
-              <Link key={index} href={`/project/${project.slug}`} className='w-full'>
+              <Link key={index} href={project.slug ? `/project/${project.slug}` : '#'} className='w-full'>
                 <Project index={index} title={project.title} manageModal={manageModal} key={index} />
               </Link>
             )
@@ -112,14 +114,8 @@ export default function Projects() {
             {
               projects.map((project, index) => {
                 const { src, color } = project
-                return <div className={styles.modal} style={{ backgroundColor: color }} key={`modal_${index}`}>
-                  <Image
-                    loader={imageLoader}
-                    src={`${src}`}
-                    width={300}
-                    height={0}
-                    alt="image"
-                  />
+                return <div className={styles.modal} key={`modal_${index}`}>
+                 
                 </div>
               })
             }
